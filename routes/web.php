@@ -4,17 +4,6 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GastosController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -28,5 +17,17 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/register_gastos', function () {
+    return view('register_gasto');
+})->middleware(['auth', 'verified'])->name('register_gastos');
+
+Route::post('/register_gastos/gasto', [
+    GastosController::class, 'store'
+])->middleware(['auth', 'verified'])->name('register_gastos.gasto');
+
+Route::delete('/delete_gastos/', [
+    GastosController::class, 'destroy'
+])->middleware(['auth', 'verified'])->name('delete_gastos');
 
 require __DIR__.'/auth.php';
