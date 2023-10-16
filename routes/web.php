@@ -16,18 +16,19 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/gastos', function () {
+        return view('gastos');
+    })->name('gastos');
+
+    Route::post('/gastos/cadastrar', [
+        GastosController::class, 'store'
+    ])->name('gastos.cadastrar');
+
+    Route::delete('/gastos/excluir', [
+        GastosController::class, 'destroy'
+    ])->name('gastos.excluir');
 });
 
-Route::get('/register_gastos', function () {
-    return view('register_gasto');
-})->middleware(['auth', 'verified'])->name('register_gastos');
-
-Route::post('/register_gastos/gasto', [
-    GastosController::class, 'store'
-])->middleware(['auth', 'verified'])->name('register_gastos.gasto');
-
-Route::delete('/delete_gastos/', [
-    GastosController::class, 'destroy'
-])->middleware(['auth', 'verified'])->name('delete_gastos');
 
 require __DIR__.'/auth.php';
