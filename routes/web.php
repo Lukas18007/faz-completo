@@ -25,7 +25,7 @@ Route::middleware('auth')->group(function () {
         GastosController::class, 'store'
     ])->name('gastos.cadastrar');
 
-    Route::delete('/gastos/excluir', [
+    Route::delete('/gastos/excluir/{id}', [
         GastosController::class, 'destroy'
     ])->name('gastos.excluir');
 });

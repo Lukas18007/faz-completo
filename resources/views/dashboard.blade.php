@@ -27,7 +27,11 @@
                                 <td class="border border-slate-700"> {{ \Carbon\Carbon::parse($gasto->dt_payment)->format('d/m/Y') }} </td>
                                 <td class="border border-slate-700"> {{ $gasto->payment_type }} </td>
                                 <td class="border border-slate-700">
-                                    <x-danger-button>X</x-danger-button>
+                                    <form method="POST" action="{{ route('gastos.excluir', ['id' => $gasto->id]) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <x-danger-button class="ml-4" type="submit">X</x-danger-button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

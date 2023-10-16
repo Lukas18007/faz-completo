@@ -90,6 +90,15 @@ class GastosController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $gasto = Gastos::findOrFail($id);
+            $gasto->delete();
+
+            return redirect()->route('dashboard')
+                ->with('success', 'Gasto excluído com sucesso');
+        } catch (\Exception $e) {
+            return redirect()->route('dashboard')
+                ->with('error', 'Erro ao excluir o gasto');
+        }
     }
 }
