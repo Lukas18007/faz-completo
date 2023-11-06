@@ -12,7 +12,7 @@ Site de controle de gastos feito em PHP com laravel.
 
 - Nome;
 - Email;
-- Senha de até 8 dígitos.
+- Senha de no mínimo 8 dígitos.
 
 ## Requisitos de login
 
